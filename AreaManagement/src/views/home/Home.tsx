@@ -1,11 +1,11 @@
 import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/home/Home.css';
-import { areaType } from '../../types/AreaType';
+import { shapeType } from '../../types/ShapeType';
 import { AreaContext } from '../areaContext/areaProvider';
 import { Header } from '../header/Header';
 
-export const ShapeContext = createContext<{ shapeValue: areaType }>;
+export const ShapeContext = createContext<{ shapeValue: shapeType }>;
 
 export const Home = () => {
     const navigate = useNavigate();

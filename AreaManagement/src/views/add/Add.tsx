@@ -2,9 +2,9 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import '../../styles/add/add.css';
-import { areaType } from '../../types/AreaType';
 import { circleType } from '../../types/Circle';
 import { quadrilareaType } from '../../types/Quadrilarea';
+import { shapeType } from '../../types/ShapeType';
 import { triangleType } from '../../types/TraiangleType';
 import { trapezoidType } from '../../types/Trapezoid';
 import { AreaContext } from '../areaContext/areaProvider';
@@ -43,7 +43,7 @@ export const Add = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const id = uuidv4();
-        let shape: areaType;
+        let shape: shapeType;
 
         switch (shapeName) {
             case "三角形":
