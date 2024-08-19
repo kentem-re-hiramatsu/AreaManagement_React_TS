@@ -87,6 +87,65 @@ export const Add = () => {
         )
     }
 
+    const inputTriangle = (): ReactElement => {
+        return (
+            <>
+                <label>
+                    底辺
+                    <input ref={inputBaseLength} type="number" min={0} />
+                </label>
+                <label>
+                    高さ
+                    <input ref={inputHeight} type="number" min={0} />
+                </label>
+            </>
+        );
+    }
+
+    const inputQuadrilarea = (): ReactElement => {
+        return (
+            <>
+                <label>
+                    幅
+                    <input ref={inputBaseLength} type="number" min={0} />
+                </label>
+                <label>
+                    高さ
+                    <input ref={inputHeight} type="number" min={0} />
+                </label>
+            </>
+        );
+    }
+
+    const inputTrapezoid = (): ReactElement => {
+        return (
+            <>
+                <label >
+                    上底
+                    <input ref={inputUpperBase} type="number" min={0} />
+                </label>
+                <label>
+                    下底
+                    <input ref={inputBaseLength} type="number" min={0} />
+                </label>
+                <label>
+                    高さ
+                    <input ref={inputHeight} type="number" min={0} />
+                </label>
+            </>
+        );
+    }
+
+    const inputCircle = (): ReactElement => {
+        return (
+            <>
+                <label>
+                    半径
+                    <input ref={inputBaseLength} type="number" min={0} />
+                </label>
+            </>
+        );
+    }
     return (
         <>
             <Header />
@@ -98,58 +157,10 @@ export const Add = () => {
                     {shapeRadio(shapeNames.trapezoid)}
                     {shapeRadio(shapeNames.circle)}
                 </section>
-                {
-                    shapeName === shapeNames.triangle &&
-                    <>
-                        <label>
-                            底辺
-                            <input ref={inputBaseLength} type="number" min={0} />
-                        </label>
-                        <label>
-                            高さ
-                            <input ref={inputHeight} type="number" min={0} />
-                        </label>
-                    </>
-                }
-                {
-                    shapeName === shapeNames.quadrilarea &&
-                    <>
-                        <label>
-                            幅
-                            <input ref={inputBaseLength} type="number" min={0} />
-                        </label>
-                        <label>
-                            高さ
-                            <input ref={inputHeight} type="number" min={0} />
-                        </label>
-                    </>
-                }
-                {
-                    shapeName === shapeNames.trapezoid &&
-                    <>
-                        <label >
-                            上底
-                            <input ref={inputUpperBase} type="number" min={0} />
-                        </label>
-                        <label>
-                            下底
-                            <input ref={inputBaseLength} type="number" min={0} />
-                        </label>
-                        <label>
-                            高さ
-                            <input ref={inputHeight} type="number" min={0} />
-                        </label>
-                    </>
-                }
-                {
-                    shapeName === shapeNames.circle &&
-                    <>
-                        <label>
-                            半径
-                            <input ref={inputBaseLength} type="number" min={0} />
-                        </label>
-                    </>
-                }
+                {shapeName === shapeNames.triangle && inputTriangle()}
+                {shapeName === shapeNames.quadrilarea && inputQuadrilarea()}
+                {shapeName === shapeNames.trapezoid && inputTrapezoid()}
+                {shapeName === shapeNames.circle && inputCircle()}
                 <section>
                     <button type="submit">決定</button>
                 </section>

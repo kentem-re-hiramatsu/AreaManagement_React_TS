@@ -65,6 +65,66 @@ export const Change = () => {
         )
     }
 
+    const inputTriangle = (): ReactElement => {
+        return (
+            <>
+                <label>
+                    底辺
+                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as triangleType).baseLength}`} />
+                </label>
+                <label>
+                    高さ
+                    <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as triangleType).height}`} />
+                </label>
+            </>
+        );
+    }
+
+    const inputQuadrilarea = (): ReactElement => {
+        return (
+            <>
+                <label>
+                    幅
+                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as quadrilareaType).baseLength}`} />
+                </label>
+                <label>
+                    高さ
+                    <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as quadrilareaType).height}`} />
+                </label>
+            </>
+        );
+    }
+
+    const inputTrapezoid = (): ReactElement => {
+        return (
+            <>
+                <label >
+                    上底
+                    <input ref={inputUpperBase} type="number" min={0} placeholder={`${(shape as trapezoidType).upperBaseLength}`} />
+                </label>
+                <label>
+                    下底
+                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as trapezoidType).baseLength}`} />
+                </label>
+                <label>
+                    高さ
+                    <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as trapezoidType).heigth}`} />
+                </label>
+            </>
+        );
+    }
+
+    const inputCircle = (): ReactElement => {
+        return (
+            <>
+                <label>
+                    半径
+                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as circleType).baseLength}`} />
+                </label>
+            </>
+        );
+    }
+
     return (
         <>
             <Header />
@@ -76,53 +136,10 @@ export const Change = () => {
                     {shapeRadio(shapeNames.trapezoid)}
                     {shapeRadio(shapeNames.circle)}
                 </section>
-                {shape!.shapeName === shapeNames.triangle && <>
-                    <label>
-                        底辺
-                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as triangleType).baseLength}`} />
-                    </label>
-                    <label>
-                        高さ
-                        <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as triangleType).height}`} />
-                    </label>
-                </>
-                }
-
-                {shape!.shapeName === shapeNames.quadrilarea && <>
-                    <label>
-                        幅
-                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as quadrilareaType).baseLength}`} />
-                    </label>
-                    <label>
-                        高さ
-                        <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as quadrilareaType).height}`} />
-                    </label>
-                </>
-                }
-
-                {shape!.shapeName === shapeNames.trapezoid && <>
-                    <label >
-                        上底
-                        <input ref={inputUpperBase} type="number" min={0} placeholder={`${(shape as trapezoidType).upperBaseLength}`} />
-                    </label>
-                    <label>
-                        下底
-                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as trapezoidType).baseLength}`} />
-                    </label>
-                    <label>
-                        高さ
-                        <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as trapezoidType).heigth}`} />
-                    </label>
-                </>
-                }
-
-                {shape!.shapeName === shapeNames.circle && <>
-                    <label>
-                        半径
-                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as circleType).baseLength}`} />
-                    </label>
-                </>
-                }
+                {shape!.shapeName === shapeNames.triangle && inputTriangle()}
+                {shape!.shapeName === shapeNames.quadrilarea && inputQuadrilarea()}
+                {shape!.shapeName === shapeNames.trapezoid && inputTrapezoid()}
+                {shape!.shapeName === shapeNames.circle && inputCircle()}
                 <section>
                     <button type="submit">決定</button>
                 </section>
