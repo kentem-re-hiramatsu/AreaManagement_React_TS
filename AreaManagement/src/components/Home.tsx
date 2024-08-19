@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/home/Home.css';
 import { AreaContext } from '../provider/areaProvider';
+import '../styles/home/Home.css';
 import { shapeType } from '../types/shape';
 import { Header } from './Header';
 

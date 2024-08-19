@@ -1,19 +1,15 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import '../../styles/add/add.css';
 import { shapeNames } from '../consts/ShapeName';
 import { AreaContext } from '../provider/areaProvider';
+import '../styles/add/add.css';
 import { circleType } from '../types/circle';
 import { quadrilareaType } from '../types/quadrilarea';
 import { shapeType } from '../types/shape';
 import { triangleType } from '../types/traiangle';
 import { trapezoidType } from '../types/trapezoid';
-import { Circle } from './Circle';
 import { Header } from './Header';
-import { Quadrilarea } from './Quadrilarea';
-import { Trapezoid } from './Trapezoid';
-import { Triangle } from './Triangle';
 
 export const Add = () => {
     const navigate = useNavigate();
@@ -24,21 +20,6 @@ export const Add = () => {
     const [upperBaseLength, setUpperBaseLength] = useState<number>(0);
 
     const { shapeData, setShapeData } = useContext(AreaContext)!;
-
-    const handleBChange = (newBaseLength: number) => {
-        setBaseLength(newBaseLength);
-    };
-
-    const handleBHChange = (newBaseLength: number, newHeight: number) => {
-        setBaseLength(newBaseLength);
-        setHeight(newHeight);
-    };
-
-    const handleBHUChange = (newBaseLength: number, newHeight: number, newUpperBaseLength: number) => {
-        setBaseLength(newBaseLength);
-        setHeight(newHeight);
-        setUpperBaseLength(newUpperBaseLength);
-    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -116,13 +97,7 @@ export const Add = () => {
                     </label>
                 </section>
 
-                {shapeName === shapeNames.triangle && <Triangle handleBHChange={handleBHChange} />}
 
-                {shapeName === shapeNames.quadrilarea && <Quadrilarea handleBHChange={handleBHChange} />}
-
-                {shapeName === shapeNames.trapezoid && <Trapezoid handleBHUChange={handleBHUChange} />}
-
-                {shapeName === shapeNames.circle && <Circle handleBChange={handleBChange} />}
 
                 <section>
                     <button type="submit">決定</button>
