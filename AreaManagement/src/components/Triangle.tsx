@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+
 type propsType = {
     handleBHChange: (newBaseLength: number, newHeight: number) => void;
 }
 
-export const Quadrilarea: React.FC<propsType> = ({ handleBHChange }) => {
+export const Triangle: React.FC<propsType> = ({ handleBHChange }) => {
     const [baseLength, setBaseLength] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);
 
@@ -18,15 +19,16 @@ export const Quadrilarea: React.FC<propsType> = ({ handleBHChange }) => {
         setHeight(newHeight);
         handleBHChange(baseLength, newHeight);
     };
+
     return (
         <>
             <label>
-                幅
-                <input type="number" onChange={handleBaseChange} />
+                底辺
+                <input type="number" min={0} onChange={handleBaseChange} />
             </label>
             <label>
                 高さ
-                <input type="number" onChange={handleHeightChange} />
+                <input type="number" min={0} onChange={handleHeightChange} />
             </label>
         </>
     );

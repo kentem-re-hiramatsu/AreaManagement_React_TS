@@ -12,7 +12,7 @@ export const Circle: React.FC<propsType> = ({ handleBChange }) => {
     return (
         <label>
             半径
-            <input type="number" onChange={handleBaseChange} />
+            <input type="number" min={0} onChange={handleBaseChange} />
         </label>
     );
 }

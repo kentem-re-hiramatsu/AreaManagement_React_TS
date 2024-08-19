@@ -2,28 +2,28 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import '../../styles/add/add.css';
-import { circleType } from '../../types/Circle';
-import { quadrilareaType } from '../../types/Quadrilarea';
-import { shapeType } from '../../types/ShapeType';
-import { triangleType } from '../../types/TraiangleType';
-import { trapezoidType } from '../../types/Trapezoid';
-import { AreaContext } from '../areaContext/areaProvider';
-import { Circle } from '../circle/Circle';
-import { Header } from '../header/Header';
-import { Quadrilarea } from '../quadrilarea/Quadrilarea';
-import { Trapezoid } from '../trapezoid/Trapezoid';
-import { Triangle } from '../triangle/Triangle';
+import { shapeNames } from '../consts/ShapeName';
+import { AreaContext } from '../provider/areaProvider';
+import { circleType } from '../types/circle';
+import { quadrilareaType } from '../types/quadrilarea';
+import { shapeType } from '../types/shape';
+import { triangleType } from '../types/traiangle';
+import { trapezoidType } from '../types/trapezoid';
+import { Circle } from './Circle';
+import { Header } from './Header';
+import { Quadrilarea } from './Quadrilarea';
+import { Trapezoid } from './Trapezoid';
+import { Triangle } from './Triangle';
 
 export const Add = () => {
-    const context = useContext(AreaContext);
     const navigate = useNavigate();
 
-    const [shapeName, setShapeName] = useState<string>("三角形");
+    const [shapeName, setShapeName] = useState<string>(shapeNames.triangle);
     const [baseLength, setBaseLength] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);
     const [upperBaseLength, setUpperBaseLength] = useState<number>(0);
 
-    const { shapeData, setShapeData } = context!;
+    const { shapeData, setShapeData } = useContext(AreaContext)!;
 
     const handleBChange = (newBaseLength: number) => {
         setBaseLength(newBaseLength);
@@ -46,7 +46,7 @@ export const Add = () => {
         let shape: shapeType;
 
         switch (shapeName) {
-            case "三角形":
+            case shapeNames.triangle:
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -55,7 +55,7 @@ export const Add = () => {
                     height: height,
                 } as triangleType;
                 break;
-            case "四角形":
+            case shapeNames.quadrilarea:
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -64,7 +64,7 @@ export const Add = () => {
                     height: height,
                 } as quadrilareaType;
                 break;
-            case "台形":
+            case shapeNames.trapezoid:
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -74,7 +74,7 @@ export const Add = () => {
                     heigth: height,
                 } as trapezoidType;
                 break;
-            case "円":
+            case shapeNames.circle:
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -99,30 +99,30 @@ export const Add = () => {
             <form onSubmit={handleSubmit}>
                 <section>
                     <label>
-                        <input type="radio" name='shape' value="三角形" checked={shapeName === '三角形'} onChange={(e) => setShapeName(e.target.value)} />
-                        三角形
+                        <input type="radio" name='shape' value={shapeNames.triangle} checked={shapeName === shapeNames.triangle} onChange={(e) => setShapeName(e.target.value)} />
+                        {shapeNames.triangle}
                     </label>
                     <label>
-                        <input type="radio" name='shape' value="四角形" checked={shapeName === '四角形'} onChange={(e) => setShapeName(e.target.value)} />
-                        四角形
+                        <input type="radio" name='shape' value={shapeNames.quadrilarea} checked={shapeName === shapeNames.quadrilarea} onChange={(e) => setShapeName(e.target.value)} />
+                        {shapeNames.quadrilarea}
                     </label>
                     <label>
-                        <input type="radio" name='shape' value="台形" checked={shapeName === '台形'} onChange={(e) => setShapeName(e.target.value)} />
-                        台形
+                        <input type="radio" name='shape' value={shapeNames.trapezoid} checked={shapeName === shapeNames.trapezoid} onChange={(e) => setShapeName(e.target.value)} />
+                        {shapeNames.trapezoid}
                     </label>
                     <label>
-                        <input type="radio" name='shape' value="円" checked={shapeName === '円'} onChange={(e) => setShapeName(e.target.value)} />
-                        円
+                        <input type="radio" name='shape' value={shapeNames.circle} checked={shapeName === shapeNames.circle} onChange={(e) => setShapeName(e.target.value)} />
+                        {shapeNames.circle}
                     </label>
                 </section>
 
-                {shapeName === '三角形' && <Triangle handleBHChange={handleBHChange} />}
+                {shapeName === shapeNames.triangle && <Triangle handleBHChange={handleBHChange} />}
 
-                {shapeName === '四角形' && <Quadrilarea handleBHChange={handleBHChange} />}
+                {shapeName === shapeNames.quadrilarea && <Quadrilarea handleBHChange={handleBHChange} />}
 
-                {shapeName === '台形' && <Trapezoid handleBHUChange={handleBHUChange} />}
+                {shapeName === shapeNames.trapezoid && <Trapezoid handleBHUChange={handleBHUChange} />}
 
-                {shapeName === '円' && <Circle handleBChange={handleBChange} />}
+                {shapeName === shapeNames.circle && <Circle handleBChange={handleBChange} />}
 
                 <section>
                     <button type="submit">決定</button>

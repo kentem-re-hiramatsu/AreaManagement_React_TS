@@ -31,15 +31,15 @@ export const Trapezoid: React.FC<propsType> = ({ handleBHUChange }) => {
         <>
             <label>
                 上底
-                <input type="number" onChange={handleUpperBaseLengthChange} />
+                <input type="number" min={0} onChange={handleUpperBaseLengthChange} />
             </label>
             <label>
                 下底
-                <input type="number" onChange={handleBaseChange} />
+                <input type="number" min={0} onChange={handleBaseChange} />
             </label>
             <label>
                 高さ
-                <input type="number" onChange={handleHeightChange} />
+                <input type="number" min={0} onChange={handleHeightChange} />
             </label>
         </>
     );

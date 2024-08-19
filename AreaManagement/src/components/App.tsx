@@ -1,9 +1,9 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { AreaProvider } from '../provider/areaProvider.tsx';
 import '../styles/App.css';
-import { Add } from "./add/Add.tsx";
-import { AreaProvider } from './areaContext/areaProvider.tsx';
-import { Change } from './change/Change.tsx';
-import { Home } from './home/Home';
+import { Add } from "./Add.tsx";
+import { Change } from './Change';
+import { Home } from './Home';
 
 function App() {
   return (

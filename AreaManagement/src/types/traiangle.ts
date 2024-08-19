@@ -1,4 +1,4 @@
-import { shapeType } from './ShapeType';
+import { shapeType } from './shape';
 
 export type triangleType = shapeType & {
     baseLength: number;
