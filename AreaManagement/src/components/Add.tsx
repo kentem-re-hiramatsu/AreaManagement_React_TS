@@ -64,7 +64,7 @@ export const Add = () => {
                 shape = {
                     id: id,
                     shapeName: shapeName,
-                    area: baseLength * baseLength * 3.14,
+                    area: Math.round((baseLength * baseLength * Math.PI) * 100) / 100,
                     baseLength: baseLength,
                 } as circleType;
                 break;

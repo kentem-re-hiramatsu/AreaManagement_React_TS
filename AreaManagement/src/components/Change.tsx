@@ -49,7 +49,7 @@ export const Change = () => {
             case shapeNames.circle:
                 const circle = shape as circleType;
                 circle.baseLength = baseLength;
-                circle.area = baseLength * baseLength * 3.14;
+                circle.area = Math.round((baseLength * baseLength * Math.PI) * 100) / 100;
                 break;
             default: break;
         }
