@@ -7,6 +7,7 @@ import '../styles/add/add.css';
 import { circleType } from '../types/circle';
 import { quadrilareaType } from '../types/quadrilarea';
 import { shapeType } from '../types/shape';
+import { ShapeName } from '../types/ShapeNames';
 import { triangleType } from '../types/traiangle';
 import { trapezoidType } from '../types/trapezoid';
 import { Header } from './Header';
@@ -14,7 +15,7 @@ import { Header } from './Header';
 export const Add = () => {
     const navigate = useNavigate();
 
-    const [shapeName, setShapeName] = useState<string>(shapeNames.triangle);
+    const [shapeName, setShapeName] = useState<ShapeName>('triangle');
 
     const inputBaseLength = useRef<HTMLInputElement>(null);
     const inputHeight = useRef<HTMLInputElement>(null);
@@ -32,7 +33,7 @@ export const Add = () => {
         const upperBaseLength: number = inputUpperBase.current ? parseInt(inputUpperBase.current.value) : 0;
 
         switch (shapeName) {
-            case shapeNames.triangle:
+            case 'triangle':
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -41,7 +42,7 @@ export const Add = () => {
                     height: height,
                 } as triangleType;
                 break;
-            case shapeNames.quadrilarea:
+            case 'quadrilarea':
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -50,7 +51,7 @@ export const Add = () => {
                     height: height,
                 } as quadrilareaType;
                 break;
-            case shapeNames.trapezoid:
+            case 'trapezoid':
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -60,7 +61,7 @@ export const Add = () => {
                     heigth: height,
                 } as trapezoidType;
                 break;
-            case shapeNames.circle:
+            case 'circle':
                 shape = {
                     id: id,
                     shapeName: shapeName,
@@ -78,11 +79,11 @@ export const Add = () => {
         navigate('/');
     }
 
-    const shapeRadio = (name: string): ReactElement => {
+    const shapeRadio = (name: ShapeName): ReactElement => {
         return (
             <label>
-                <input type="radio" name='shape' value={name} checked={name === shapeName} onChange={(e) => setShapeName(e.target.value)} />
-                {name}
+                <input type="radio" name='shape' checked={name === shapeName} onChange={() => setShapeName(name)} />
+                {shapeNames[name]}
             </label>
         )
     }
@@ -152,15 +153,15 @@ export const Add = () => {
             <h1>Add</h1>
             <form onSubmit={handleSubmit}>
                 <section>
-                    {shapeRadio(shapeNames.triangle)}
-                    {shapeRadio(shapeNames.quadrilarea)}
-                    {shapeRadio(shapeNames.trapezoid)}
-                    {shapeRadio(shapeNames.circle)}
+                    {shapeRadio('triangle')}
+                    {shapeRadio('quadrilarea')}
+                    {shapeRadio('trapezoid')}
+                    {shapeRadio('circle')}
                 </section>
-                {shapeName === shapeNames.triangle && inputTriangle()}
-                {shapeName === shapeNames.quadrilarea && inputQuadrilarea()}
-                {shapeName === shapeNames.trapezoid && inputTrapezoid()}
-                {shapeName === shapeNames.circle && inputCircle()}
+                {shapeName === 'triangle' && inputTriangle()}
+                {shapeName === 'quadrilarea' && inputQuadrilarea()}
+                {shapeName === 'trapezoid' && inputTrapezoid()}
+                {shapeName === 'circle' && inputCircle()}
                 <section>
                     <button type="submit">決定</button>
                 </section>
