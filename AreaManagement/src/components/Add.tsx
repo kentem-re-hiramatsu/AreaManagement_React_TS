@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { shapeNames } from '../consts/ShapeName';
@@ -15,9 +15,10 @@ export const Add = () => {
     const navigate = useNavigate();
 
     const [shapeName, setShapeName] = useState<string>(shapeNames.triangle);
-    const [baseLength, setBaseLength] = useState<number>(0);
-    const [height, setHeight] = useState<number>(0);
-    const [upperBaseLength, setUpperBaseLength] = useState<number>(0);
+
+    const inputBaseLength = useRef<HTMLInputElement>(null);
+    const inputHeight = useRef<HTMLInputElement>(null);
+    const inputUpperBase = useRef<HTMLInputElement>(null);
 
     const { shapeData, setShapeData } = useContext(AreaContext)!;
 
@@ -26,12 +27,16 @@ export const Add = () => {
         const id = uuidv4();
         let shape: shapeType;
 
+        const baseLength: number = inputBaseLength.current ? parseInt(inputBaseLength.current.value) : 0;
+        const height: number = inputHeight.current ? parseInt(inputHeight.current.value) : 0;
+        const upperBaseLength: number = inputUpperBase.current ? parseInt(inputUpperBase.current.value) : 0;
+
         switch (shapeName) {
             case shapeNames.triangle:
                 shape = {
                     id: id,
                     shapeName: shapeName,
-                    area: baseLength * height / 2,
+                    area: baseLength * baseLength / 2,
                     baseLength: baseLength,
                     height: height,
                 } as triangleType;
@@ -96,9 +101,58 @@ export const Add = () => {
                         {shapeNames.circle}
                     </label>
                 </section>
-
-
-
+                {
+                    shapeName === shapeNames.triangle &&
+                    <>
+                        <label>
+                            底辺
+                            <input ref={inputBaseLength} type="number" min={0} />
+                        </label>
+                        <label>
+                            高さ
+                            <input ref={inputHeight} type="number" min={0} />
+                        </label>
+                    </>
+                }
+                {
+                    shapeName === shapeNames.quadrilarea &&
+                    <>
+                        <label>
+                            幅
+                            <input ref={inputBaseLength} type="number" min={0} />
+                        </label>
+                        <label>
+                            高さ
+                            <input ref={inputHeight} type="number" min={0} />
+                        </label>
+                    </>
+                }
+                {
+                    shapeName === shapeNames.trapezoid &&
+                    <>
+                        <label >
+                            上底
+                            <input ref={inputUpperBase} type="number" min={0} />
+                        </label>
+                        <label>
+                            下底
+                            <input ref={inputBaseLength} type="number" min={0} />
+                        </label>
+                        <label>
+                            高さ
+                            <input ref={inputHeight} type="number" min={0} />
+                        </label>
+                    </>
+                }
+                {
+                    shapeName === shapeNames.circle &&
+                    <>
+                        <label>
+                            半径
+                            <input ref={inputBaseLength} type="number" min={0} />
+                        </label>
+                    </>
+                }
                 <section>
                     <button type="submit">決定</button>
                 </section>
