@@ -10,8 +10,7 @@ export const ShapeContext = createContext<{ shapeValue: shapeType }>;
 export const Home = () => {
     const navigate = useNavigate();
 
-    const context = useContext(AreaContext);
-    const { shapeData, setShapeData } = context!;
+    const { shapeData, setShapeData } = useContext(AreaContext)!;
 
     const handleChangeClick = (id: string) => {
         navigate(`/change/${id}`);
