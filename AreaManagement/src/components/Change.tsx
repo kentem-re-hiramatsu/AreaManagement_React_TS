@@ -82,11 +82,11 @@ export const Change = () => {
                 {shape!.shapeName === shapeNames.triangle && <>
                     <label>
                         底辺
-                        <input ref={inputBaseLength} type="number" min={0} />
+                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as triangleType).baseLength}`} />
                     </label>
                     <label>
                         高さ
-                        <input ref={inputHeight} type="number" min={0} />
+                        <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as triangleType).height}`} />
                     </label>
                 </>
                 }
@@ -94,11 +94,11 @@ export const Change = () => {
                 {shape!.shapeName === shapeNames.quadrilarea && <>
                     <label>
                         幅
-                        <input ref={inputBaseLength} type="number" min={0} />
+                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as quadrilareaType).baseLength}`} />
                     </label>
                     <label>
                         高さ
-                        <input ref={inputHeight} type="number" min={0} />
+                        <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as quadrilareaType).height}`} />
                     </label>
                 </>
                 }
@@ -106,15 +106,15 @@ export const Change = () => {
                 {shape!.shapeName === shapeNames.trapezoid && <>
                     <label >
                         上底
-                        <input ref={inputUpperBase} type="number" min={0} />
+                        <input ref={inputUpperBase} type="number" min={0} placeholder={`${(shape as trapezoidType).upperBaseLength}`} />
                     </label>
                     <label>
                         下底
-                        <input ref={inputBaseLength} type="number" min={0} />
+                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as trapezoidType).baseLength}`} />
                     </label>
                     <label>
                         高さ
-                        <input ref={inputHeight} type="number" min={0} />
+                        <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as trapezoidType).heigth}`} />
                     </label>
                 </>
                 }
@@ -122,7 +122,7 @@ export const Change = () => {
                 {shape!.shapeName === shapeNames.circle && <>
                     <label>
                         半径
-                        <input ref={inputBaseLength} type="number" min={0} />
+                        <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as circleType).baseLength}`} />
                     </label>
                 </>
                 }
