@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { AreaProvider } from '../provider/areaProvider.tsx';
 import '../styles/App.css';
-import { Add } from "./Add.tsx";
+import { Add } from "./Add";
 import { Change } from './Change';
 import { Home } from './Home';
 
