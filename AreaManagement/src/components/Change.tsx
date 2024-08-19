@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { ReactElement, useContext, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { shapeNames } from "../consts/ShapeName";
 import { AreaContext } from '../provider/areaProvider';
@@ -56,28 +56,25 @@ export const Change = () => {
         navigate('/');
     };
 
+    const shapeRadio = (name: string): ReactElement => {
+        return (
+            <label>
+                <input type="radio" name='shape' value={name} checked={shape!.shapeName === name} />
+                {name}
+            </label>
+        )
+    }
+
     return (
         <>
             <Header />
             <h1>Change{shape!.shapeName}</h1>
             <form onSubmit={handleSubmit}>
                 <section>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.triangle} checked={shape!.shapeName === shapeNames.triangle} />
-                        {shapeNames.triangle}
-                    </label>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.quadrilarea} checked={shape!.shapeName === shapeNames.quadrilarea} />
-                        {shapeNames.quadrilarea}
-                    </label>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.trapezoid} checked={shape!.shapeName === shapeNames.trapezoid} />
-                        {shapeNames.trapezoid}
-                    </label>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.circle} checked={shape!.shapeName === shapeNames.circle} />
-                        {shapeNames.circle}
-                    </label>
+                    {shapeRadio(shapeNames.triangle)}
+                    {shapeRadio(shapeNames.quadrilarea)}
+                    {shapeRadio(shapeNames.trapezoid)}
+                    {shapeRadio(shapeNames.circle)}
                 </section>
                 {shape!.shapeName === shapeNames.triangle && <>
                     <label>

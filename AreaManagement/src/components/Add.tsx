@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { ReactElement, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { shapeNames } from '../consts/ShapeName';
@@ -78,28 +78,25 @@ export const Add = () => {
         navigate('/');
     }
 
+    const shapeRadio = (name: string): ReactElement => {
+        return (
+            <label>
+                <input type="radio" name='shape' value={name} checked={name === shapeName} onChange={(e) => setShapeName(e.target.value)} />
+                {name}
+            </label>
+        )
+    }
+
     return (
         <>
             <Header />
             <h1>Add</h1>
             <form onSubmit={handleSubmit}>
                 <section>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.triangle} checked={shapeName === shapeNames.triangle} onChange={(e) => setShapeName(e.target.value)} />
-                        {shapeNames.triangle}
-                    </label>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.quadrilarea} checked={shapeName === shapeNames.quadrilarea} onChange={(e) => setShapeName(e.target.value)} />
-                        {shapeNames.quadrilarea}
-                    </label>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.trapezoid} checked={shapeName === shapeNames.trapezoid} onChange={(e) => setShapeName(e.target.value)} />
-                        {shapeNames.trapezoid}
-                    </label>
-                    <label>
-                        <input type="radio" name='shape' value={shapeNames.circle} checked={shapeName === shapeNames.circle} onChange={(e) => setShapeName(e.target.value)} />
-                        {shapeNames.circle}
-                    </label>
+                    {shapeRadio(shapeNames.triangle)}
+                    {shapeRadio(shapeNames.quadrilarea)}
+                    {shapeRadio(shapeNames.trapezoid)}
+                    {shapeRadio(shapeNames.circle)}
                 </section>
                 {
                     shapeName === shapeNames.triangle &&
