@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useEffect, useRef } from 'react';
+import { FormEvent, ReactElement, RefObject, useContext, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { AreaContext } from '../components/App';
@@ -23,19 +23,19 @@ export const Change = () => {
     let inputHeight = useRef<HTMLInputElement>(null);
     let inputUpperBase = useRef<HTMLInputElement>(null);
 
-    const onChangeBaseLength = (inputNum: React.RefObject<HTMLInputElement>) => {
+    const onChangeBaseLength = (inputNum: RefObject<HTMLInputElement>) => {
         inputBaseLength = inputNum;
     };
 
-    const onChangeHeight = (inputNum: React.RefObject<HTMLInputElement>) => {
+    const onChangeHeight = (inputNum: RefObject<HTMLInputElement>) => {
         inputHeight = inputNum;
     };
 
-    const onChangeUpperBase = (inputNum: React.RefObject<HTMLInputElement>) => {
+    const onChangeUpperBase = (inputNum: RefObject<HTMLInputElement>) => {
         inputUpperBase = inputNum;
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const baseLength: number = inputBaseLength.current ? parseInt(inputBaseLength.current.value) : 0;
