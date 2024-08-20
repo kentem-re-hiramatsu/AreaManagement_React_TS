@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AreaContext } from '../components/App';
@@ -13,6 +13,10 @@ export const Home = () => {
     const navigate = useNavigate();
 
     const { shapeData, setShapeData } = useContext(AreaContext)!;
+
+    useEffect(() => {
+        localStorage.setItem('shapeData', JSON.stringify(shapeData));
+    }, [shapeData]);
 
     const handleChangeClick = (id: string) => {
         navigate(`/change/${id}`);
