@@ -162,7 +162,7 @@ export const Change = () => {
                         type="number"
                         min={0}
                         value={inputUpperBase.current?.value}
-                        onChange={() => onChangeBaseLength(inputUpperBase)}
+                        onChange={() => onChangeUpperBase(inputUpperBase)}
                     />
                 </label>
                 <label>
@@ -182,7 +182,7 @@ export const Change = () => {
                         type="number"
                         min={0}
                         value={inputHeight.current?.value}
-                        onChange={() => onChangeUpperBase(inputHeight)}
+                        onChange={() => onChangeHeight(inputHeight)}
                     />
                 </label>
             </>
