@@ -10,6 +10,7 @@ import { trapezoidType } from '../types/Trapezoid';
 import { Header } from './Header';
 
 export const Change = () => {
+    //あいうえお
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -21,9 +22,21 @@ export const Change = () => {
 
     const shape = shapeData.find((shape) => shape.id === id);
 
-    const inputBaseLength = useRef<HTMLInputElement>(null);
-    const inputHeight = useRef<HTMLInputElement>(null);
-    const inputUpperBase = useRef<HTMLInputElement>(null);
+    let inputBaseLength = useRef<HTMLInputElement>(null);
+    let inputHeight = useRef<HTMLInputElement>(null);
+    let inputUpperBase = useRef<HTMLInputElement>(null);
+
+    const onChangeBaseLength = (inputNum: React.RefObject<HTMLInputElement>) => {
+        inputBaseLength = inputNum;
+    };
+
+    const onChangeHeight = (inputNum: React.RefObject<HTMLInputElement>) => {
+        inputHeight = inputNum;
+    };
+
+    const onChangeUpperBase = (inputNum: React.RefObject<HTMLInputElement>) => {
+        inputUpperBase = inputNum;
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -75,6 +88,10 @@ export const Change = () => {
     };
 
     const inputTriangle = (): ReactElement => {
+        useEffect(() => {
+            inputBaseLength.current!.value = (shape as triangleType).baseLength.toString();
+            inputHeight.current!.value = (shape as triangleType).height.toString();
+        }, []);
         return (
             <>
                 <label>
@@ -83,27 +100,8 @@ export const Change = () => {
                         ref={inputBaseLength}
                         type="number"
                         min={0}
-                        placeholder={`${(shape as triangleType).baseLength}`}
-                    />
-                </label>
-                <label>
-                    高さ
-                    <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as triangleType).height}`} />
-                </label>
-            </>
-        );
-    };
-
-    const inputQuadrilarea = (): ReactElement => {
-        return (
-            <>
-                <label>
-                    幅
-                    <input
-                        ref={inputBaseLength}
-                        type="number"
-                        min={0}
-                        placeholder={`${(shape as quadrilareaType).baseLength}`}
+                        value={inputBaseLength.current?.value}
+                        onChange={() => onChangeBaseLength(inputBaseLength)}
                     />
                 </label>
                 <label>
@@ -112,7 +110,39 @@ export const Change = () => {
                         ref={inputHeight}
                         type="number"
                         min={0}
-                        placeholder={`${(shape as quadrilareaType).height}`}
+                        value={inputHeight.current?.value}
+                        onChange={() => onChangeHeight(inputHeight)}
+                    />
+                </label>
+            </>
+        );
+    };
+
+    const inputQuadrilarea = (): ReactElement => {
+        useEffect(() => {
+            inputBaseLength.current!.value = (shape as quadrilareaType).baseLength.toString();
+            inputHeight.current!.value = (shape as quadrilareaType).height.toString();
+        }, []);
+        return (
+            <>
+                <label>
+                    幅
+                    <input
+                        ref={inputBaseLength}
+                        type="number"
+                        min={0}
+                        value={inputBaseLength.current?.value}
+                        onChange={() => onChangeBaseLength(inputBaseLength)}
+                    />
+                </label>
+                <label>
+                    高さ
+                    <input
+                        ref={inputHeight}
+                        type="number"
+                        min={0}
+                        value={inputHeight.current?.value}
+                        onChange={() => onChangeHeight(inputHeight)}
                     />
                 </label>
             </>
@@ -120,6 +150,11 @@ export const Change = () => {
     };
 
     const inputTrapezoid = (): ReactElement => {
+        useEffect(() => {
+            inputUpperBase.current!.value = (shape as trapezoidType).upperBaseLength.toString();
+            inputBaseLength.current!.value = (shape as trapezoidType).baseLength.toString();
+            inputHeight.current!.value = (shape as trapezoidType).heigth.toString();
+        }, []);
         return (
             <>
                 <label>
@@ -128,7 +163,8 @@ export const Change = () => {
                         ref={inputUpperBase}
                         type="number"
                         min={0}
-                        placeholder={`${(shape as trapezoidType).upperBaseLength}`}
+                        value={inputUpperBase.current?.value}
+                        onChange={() => onChangeBaseLength(inputUpperBase)}
                     />
                 </label>
                 <label>
@@ -137,18 +173,28 @@ export const Change = () => {
                         ref={inputBaseLength}
                         type="number"
                         min={0}
-                        placeholder={`${(shape as trapezoidType).baseLength}`}
+                        value={inputBaseLength.current?.value}
+                        onChange={() => onChangeBaseLength(inputBaseLength)}
                     />
                 </label>
                 <label>
                     高さ
-                    <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as trapezoidType).heigth}`} />
+                    <input
+                        ref={inputHeight}
+                        type="number"
+                        min={0}
+                        value={inputHeight.current?.value}
+                        onChange={() => onChangeUpperBase(inputHeight)}
+                    />
                 </label>
             </>
         );
     };
 
     const inputCircle = (): ReactElement => {
+        useEffect(() => {
+            inputBaseLength.current!.value = (shape as circleType).baseLength.toString();
+        }, []);
         return (
             <>
                 <label>
@@ -157,7 +203,8 @@ export const Change = () => {
                         ref={inputBaseLength}
                         type="number"
                         min={0}
-                        placeholder={`${(shape as circleType).baseLength}`}
+                        value={inputBaseLength.current?.value}
+                        onChange={() => onChangeBaseLength(inputBaseLength)}
                     />
                 </label>
             </>
@@ -167,7 +214,7 @@ export const Change = () => {
     return (
         <>
             <Header />
-            <h1>Change{shape!.shapeName}</h1>
+            <h1>Change</h1>
             <form onSubmit={handleSubmit}>
                 <section>
                     {shapeRadio(shapeNames.triangle)}
