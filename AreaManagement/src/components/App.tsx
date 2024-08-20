@@ -16,7 +16,11 @@ export const AreaContext = createContext(
 );
 
 function App() {
-    const [shapeData, setShapeData] = useState<shapeType[]>([]);
+    const [shapeData, setShapeData] = useState(() => {
+        const localData = localStorage.getItem('shapeData');
+        console.log('aaa');
+        return localData ? JSON.parse(localData) : [];
+    });
 
     return (
         <Router>
