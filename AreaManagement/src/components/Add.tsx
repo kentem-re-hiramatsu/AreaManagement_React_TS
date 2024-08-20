@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useRef, useState } from 'react';
+import { FormEvent, ReactElement, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -25,7 +25,7 @@ export const Add = () => {
 
     const { shapeData, setShapeData } = useContext(AreaContext)!;
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const id = uuidv4();
         let shape: shapeType;
