@@ -10,7 +10,6 @@ import { trapezoidType } from '../types/Trapezoid';
 import { Header } from './Header';
 
 export const Change = () => {
-    //あいうえお
     const { id } = useParams();
     const navigate = useNavigate();
 
