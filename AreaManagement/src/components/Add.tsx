@@ -1,16 +1,18 @@
 import { ReactElement, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+
+import { AreaContext } from '../components/App';
 import { shapeNames } from '../consts/ShapeName';
-import { AreaContext } from '../provider/areaProvider';
-import '../styles/add/add.css';
-import { circleType } from '../types/circle';
-import { quadrilareaType } from '../types/quadrilarea';
-import { shapeType } from '../types/shape';
+import { circleType } from '../types/Circle';
+import { quadrilareaType } from '../types/Quadrilarea';
+import { shapeType } from '../types/Shape';
 import { ShapeName } from '../types/ShapeNames';
-import { triangleType } from '../types/traiangle';
-import { trapezoidType } from '../types/trapezoid';
+import { triangleType } from '../types/Traiangle';
+import { trapezoidType } from '../types/Trapezoid';
 import { Header } from './Header';
+
+import '../styles/Add.css';
 
 export const Add = () => {
     const navigate = useNavigate();
@@ -36,8 +38,8 @@ export const Add = () => {
             case 'triangle':
                 shape = {
                     id: id,
-                    shapeName: shapeName,
-                    area: baseLength * baseLength / 2,
+                    shapeName: shapeNames['triangle'],
+                    area: (baseLength * baseLength) / 2,
                     baseLength: baseLength,
                     height: height,
                 } as triangleType;
@@ -45,7 +47,7 @@ export const Add = () => {
             case 'quadrilarea':
                 shape = {
                     id: id,
-                    shapeName: shapeName,
+                    shapeName: shapeNames['quadrilarea'],
                     area: baseLength * height,
                     baseLength: baseLength,
                     height: height,
@@ -54,7 +56,7 @@ export const Add = () => {
             case 'trapezoid':
                 shape = {
                     id: id,
-                    shapeName: shapeName,
+                    shapeName: shapeNames['trapezoid'],
                     area: (upperBaseLength + baseLength) * height,
                     baseLength: baseLength,
                     upperBaseLength: upperBaseLength,
@@ -64,29 +66,31 @@ export const Add = () => {
             case 'circle':
                 shape = {
                     id: id,
-                    shapeName: shapeName,
-                    area: Math.round((baseLength * baseLength * Math.PI) * 100) / 100,
+                    shapeName: shapeNames['circle'],
+                    area: Math.round(baseLength * baseLength * Math.PI * 100) / 100,
                     baseLength: baseLength,
                 } as circleType;
                 break;
-            default: shape = {
-                id: "",
-                shapeName: "",
-                area: 0,
-            }
+            default:
+                shape = {
+                    id: '',
+                    shapeName: '',
+                    area: 0,
+                };
         }
+        localStorage.setItem(shape.id, JSON.stringify(shape));
         setShapeData([...shapeData, shape]);
         navigate('/');
-    }
+    };
 
     const shapeRadio = (name: ShapeName): ReactElement => {
         return (
             <label>
-                <input type="radio" name='shape' checked={name === shapeName} onChange={() => setShapeName(name)} />
+                <input type="radio" name="shape" checked={name === shapeName} onChange={() => setShapeName(name)} />
                 {shapeNames[name]}
             </label>
-        )
-    }
+        );
+    };
 
     const inputTriangle = (): ReactElement => {
         return (
@@ -101,7 +105,7 @@ export const Add = () => {
                 </label>
             </>
         );
-    }
+    };
 
     const inputQuadrilarea = (): ReactElement => {
         return (
@@ -116,12 +120,12 @@ export const Add = () => {
                 </label>
             </>
         );
-    }
+    };
 
     const inputTrapezoid = (): ReactElement => {
         return (
             <>
-                <label >
+                <label>
                     上底
                     <input ref={inputUpperBase} type="number" min={0} />
                 </label>
@@ -135,7 +139,7 @@ export const Add = () => {
                 </label>
             </>
         );
-    }
+    };
 
     const inputCircle = (): ReactElement => {
         return (
@@ -146,7 +150,7 @@ export const Add = () => {
                 </label>
             </>
         );
-    }
+    };
     return (
         <>
             <Header />
@@ -167,5 +171,5 @@ export const Add = () => {
                 </section>
             </form>
         </>
-    )
-}
+    );
+};

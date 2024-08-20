@@ -1,4 +1,4 @@
-import { shapeType } from './shape';
+import { shapeType } from './Shape';
 
 export type quadrilareaType = shapeType & {
     baseLength: number;

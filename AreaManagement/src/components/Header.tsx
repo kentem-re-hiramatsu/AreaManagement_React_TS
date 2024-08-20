@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import '../styles/header/header.css';
+
+import '../styles/Header.css';
 
 export const Header = () => {
     const navigate = useNavigate();
@@ -14,8 +15,12 @@ export const Header = () => {
 
     return (
         <header>
-            <div className='btn add-btn' onClick={handleHomeClick}>ホーム</div>
-            <div className='btn add-btn' onClick={handleAddClick}>追加</div>
+            <div className="btn add-btn" onClick={handleHomeClick}>
+                ホーム
+            </div>
+            <div className="btn add-btn" onClick={handleAddClick}>
+                追加
+            </div>
         </header>
-    )
-}
+    );
+};

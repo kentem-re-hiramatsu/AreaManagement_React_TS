@@ -1,19 +1,20 @@
-import { ReactElement, useContext, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { shapeNames } from "../consts/ShapeName";
-import { AreaContext } from '../provider/areaProvider';
-import { circleType } from "../types/circle";
-import { quadrilareaType } from "../types/quadrilarea";
-import { triangleType } from "../types/traiangle";
-import { trapezoidType } from "../types/trapezoid";
-import { Header } from "./Header";
+import { ReactElement, useContext, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { AreaContext } from '../components/App';
+import { shapeNames } from '../consts/ShapeName';
+import { circleType } from '../types/Circle';
+import { quadrilareaType } from '../types/Quadrilarea';
+import { triangleType } from '../types/Traiangle';
+import { trapezoidType } from '../types/Trapezoid';
+import { Header } from './Header';
 
 export const Change = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
     const { shapeData } = useContext(AreaContext)!;
-    const shape = shapeData.find(shape => shape.id === id);
+    const shape = shapeData.find((shape) => shape.id === id);
 
     const inputBaseLength = useRef<HTMLInputElement>(null);
     const inputHeight = useRef<HTMLInputElement>(null);
@@ -31,13 +32,13 @@ export const Change = () => {
                 const triangle = shape as triangleType;
                 triangle.baseLength = baseLength;
                 triangle.height = height;
-                triangle.area = baseLength * height / 2;
+                triangle.area = (baseLength * height) / 2;
                 break;
             case shapeNames.quadrilarea:
                 const quadrilarea = shape as quadrilareaType;
                 quadrilarea.baseLength = baseLength;
                 quadrilarea.height = height;
-                quadrilarea.area = baseLength * height
+                quadrilarea.area = baseLength * height;
                 break;
             case shapeNames.trapezoid:
                 const trapezoid = shape as trapezoidType;
@@ -49,9 +50,10 @@ export const Change = () => {
             case shapeNames.circle:
                 const circle = shape as circleType;
                 circle.baseLength = baseLength;
-                circle.area = Math.round((baseLength * baseLength * Math.PI) * 100) / 100;
+                circle.area = Math.round(baseLength * baseLength * Math.PI * 100) / 100;
                 break;
-            default: break;
+            default:
+                break;
         }
         navigate('/');
     };
@@ -59,18 +61,23 @@ export const Change = () => {
     const shapeRadio = (name: string): ReactElement => {
         return (
             <label>
-                <input type="radio" name='shape' value={name} checked={shape!.shapeName === name} />
+                <input type="radio" name="shape" value={name} checked={shape!.shapeName === name} />
                 {name}
             </label>
-        )
-    }
+        );
+    };
 
     const inputTriangle = (): ReactElement => {
         return (
             <>
                 <label>
                     底辺
-                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as triangleType).baseLength}`} />
+                    <input
+                        ref={inputBaseLength}
+                        type="number"
+                        min={0}
+                        placeholder={`${(shape as triangleType).baseLength}`}
+                    />
                 </label>
                 <label>
                     高さ
@@ -78,33 +85,53 @@ export const Change = () => {
                 </label>
             </>
         );
-    }
+    };
 
     const inputQuadrilarea = (): ReactElement => {
         return (
             <>
                 <label>
                     幅
-                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as quadrilareaType).baseLength}`} />
+                    <input
+                        ref={inputBaseLength}
+                        type="number"
+                        min={0}
+                        placeholder={`${(shape as quadrilareaType).baseLength}`}
+                    />
                 </label>
                 <label>
                     高さ
-                    <input ref={inputHeight} type="number" min={0} placeholder={`${(shape as quadrilareaType).height}`} />
+                    <input
+                        ref={inputHeight}
+                        type="number"
+                        min={0}
+                        placeholder={`${(shape as quadrilareaType).height}`}
+                    />
                 </label>
             </>
         );
-    }
+    };
 
     const inputTrapezoid = (): ReactElement => {
         return (
             <>
-                <label >
+                <label>
                     上底
-                    <input ref={inputUpperBase} type="number" min={0} placeholder={`${(shape as trapezoidType).upperBaseLength}`} />
+                    <input
+                        ref={inputUpperBase}
+                        type="number"
+                        min={0}
+                        placeholder={`${(shape as trapezoidType).upperBaseLength}`}
+                    />
                 </label>
                 <label>
                     下底
-                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as trapezoidType).baseLength}`} />
+                    <input
+                        ref={inputBaseLength}
+                        type="number"
+                        min={0}
+                        placeholder={`${(shape as trapezoidType).baseLength}`}
+                    />
                 </label>
                 <label>
                     高さ
@@ -112,18 +139,23 @@ export const Change = () => {
                 </label>
             </>
         );
-    }
+    };
 
     const inputCircle = (): ReactElement => {
         return (
             <>
                 <label>
                     半径
-                    <input ref={inputBaseLength} type="number" min={0} placeholder={`${(shape as circleType).baseLength}`} />
+                    <input
+                        ref={inputBaseLength}
+                        type="number"
+                        min={0}
+                        placeholder={`${(shape as circleType).baseLength}`}
+                    />
                 </label>
             </>
         );
-    }
+    };
 
     return (
         <>
@@ -145,5 +177,5 @@ export const Change = () => {
                 </section>
             </form>
         </>
-    )
-}
+    );
+};

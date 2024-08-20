@@ -1,9 +1,11 @@
 import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AreaContext } from '../provider/areaProvider';
-import '../styles/home/Home.css';
-import { shapeType } from '../types/shape';
+
+import { AreaContext } from '../components/App';
+import { shapeType } from '../types/Shape';
 import { Header } from './Header';
+
+import '../styles/Home.css';
 
 export const ShapeContext = createContext<{ shapeValue: shapeType }>;
 
@@ -14,11 +16,11 @@ export const Home = () => {
 
     const handleChangeClick = (id: string) => {
         navigate(`/change/${id}`);
-    }
+    };
 
     const handleRemoveClick = (id: string) => {
-        setShapeData(shapeData.filter(shape => shape.id !== id));
-    }
+        setShapeData(shapeData.filter((shape) => shape.id !== id));
+    };
 
     return (
         <>
@@ -34,13 +36,17 @@ export const Home = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {shapeData.map((value) => {
+                    {(shapeData ?? []).map((value) => {
                         return (
                             <tr key={value.id}>
                                 <th>{value.shapeName}</th>
                                 <th>{value.area}</th>
-                                <th><button onClick={() => handleChangeClick(value.id)}>変更</button></th>
-                                <th><button onClick={() => handleRemoveClick(value.id)}>削除</button></th>
+                                <th>
+                                    <button onClick={() => handleChangeClick(value.id)}>変更</button>
+                                </th>
+                                <th>
+                                    <button onClick={() => handleRemoveClick(value.id)}>削除</button>
+                                </th>
                             </tr>
                         );
                     })}
@@ -48,4 +54,4 @@ export const Home = () => {
             </table>
         </>
     );
-}
+};
