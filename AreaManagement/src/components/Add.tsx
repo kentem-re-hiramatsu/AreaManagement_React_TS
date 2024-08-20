@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useRef, useState } from 'react';
+import { ReactElement, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -24,6 +24,10 @@ export const Add = () => {
     const inputUpperBase = useRef<HTMLInputElement>(null);
 
     const { shapeData, setShapeData } = useContext(AreaContext)!;
+
+    useEffect(() => {
+        localStorage.setItem('shapeData', JSON.stringify(shapeData));
+    }, [shapeData]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -78,9 +82,10 @@ export const Add = () => {
                     area: 0,
                 };
         }
-        localStorage.setItem(shape.id, JSON.stringify(shape));
         setShapeData([...shapeData, shape]);
-        navigate('/');
+        setTimeout(() => {
+            navigate('/');
+        }, 100);
     };
 
     const shapeRadio = (name: ShapeName): ReactElement => {
