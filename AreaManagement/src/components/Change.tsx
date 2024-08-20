@@ -5,6 +5,7 @@ import { AreaContext } from '../components/App';
 import { shapeNames } from '../consts/ShapeName';
 import { circleType } from '../types/Circle';
 import { quadrilareaType } from '../types/Quadrilarea';
+import { shapeType } from '../types/Shape';
 import { triangleType } from '../types/Traiangle';
 import { trapezoidType } from '../types/Trapezoid';
 import { Header } from './Header';
@@ -13,9 +14,10 @@ export const Change = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { shapeData } = useContext(AreaContext)!;
+    const { shapeData, setShapeData } = useContext(AreaContext)!;
 
-    const shape = shapeData.find((shape) => shape.id === id);
+    const coppyData: shapeType[] = [...shapeData];
+    const shape = coppyData.find((shape) => shape.id === id);
 
     let inputBaseLength = useRef<HTMLInputElement>(null);
     let inputHeight = useRef<HTMLInputElement>(null);
@@ -68,6 +70,7 @@ export const Change = () => {
             default:
                 break;
         }
+        setShapeData([...coppyData]);
         setTimeout(() => {
             navigate('/');
         }, 100);
