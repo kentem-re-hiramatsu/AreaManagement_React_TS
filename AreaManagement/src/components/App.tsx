@@ -23,7 +23,6 @@ function App() {
 
     useEffect(() => {
         localStorage.setItem('shapeData', JSON.stringify(shapeData));
-        console.log('a');
     }, [shapeData]);
 
     return (
