@@ -15,10 +15,6 @@ export const Change = () => {
 
     const { shapeData } = useContext(AreaContext)!;
 
-    useEffect(() => {
-        localStorage.setItem('shapeData', JSON.stringify(shapeData));
-    }, [shapeData]);
-
     const shape = shapeData.find((shape) => shape.id === id);
 
     let inputBaseLength = useRef<HTMLInputElement>(null);

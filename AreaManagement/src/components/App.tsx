@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, useState } from 'react';
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import { shapeType } from '../types/Shape';
@@ -20,6 +20,11 @@ function App() {
         const localData = localStorage.getItem('shapeData');
         return localData ? JSON.parse(localData) : [];
     });
+
+    useEffect(() => {
+        localStorage.setItem('shapeData', JSON.stringify(shapeData));
+        console.log('a');
+    }, [shapeData]);
 
     return (
         <Router>
