@@ -16,8 +16,8 @@ export const Change = () => {
 
     const { shapeData, setShapeData } = useContext(AreaContext)!;
 
-    const coppyData: shapeType[] = [...shapeData];
-    const shape = coppyData.find((shape) => shape.id === id);
+    const copyData: shapeType[] = [...shapeData];
+    const shape = copyData.find((shape) => shape.id === id);
 
     let inputBaseLength = useRef<HTMLInputElement>(null);
     let inputHeight = useRef<HTMLInputElement>(null);
@@ -70,7 +70,7 @@ export const Change = () => {
             default:
                 break;
         }
-        setShapeData([...coppyData]);
+        setShapeData([...copyData]);
         setTimeout(() => {
             navigate('/');
         }, 100);
