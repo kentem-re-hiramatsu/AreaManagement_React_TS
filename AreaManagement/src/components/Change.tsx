@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useRef } from 'react';
+import { ReactElement, useContext, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { AreaContext } from '../components/App';
@@ -14,6 +14,11 @@ export const Change = () => {
     const navigate = useNavigate();
 
     const { shapeData } = useContext(AreaContext)!;
+
+    useEffect(() => {
+        localStorage.setItem('shapeData', JSON.stringify(shapeData));
+    }, [shapeData]);
+
     const shape = shapeData.find((shape) => shape.id === id);
 
     const inputBaseLength = useRef<HTMLInputElement>(null);
@@ -55,7 +60,9 @@ export const Change = () => {
             default:
                 break;
         }
-        navigate('/');
+        setTimeout(() => {
+            navigate('/');
+        }, 100);
     };
 
     const shapeRadio = (name: string): ReactElement => {
